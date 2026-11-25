@@ -47,9 +47,10 @@ Odoo tabs afterwards. Existing installs of the module keep their settings: the t
 Nothing is sent to Botify until an administrator enters the Botify connection (API URL, installation key and
 installation secret) in **Settings, Botify Agent** and ticks **Botify agent**. Until then every module route refuses
 with `INTEGRATION_DISABLED` and no chat is loaded. After that, only employees in the group **Botify Agent user** send
-data. When Odoo loads for such an employee, the browser sends who the employee is, the open page and any pending
-time-off notifications, even if they never open the chat. Chat messages, the records the assistant reads and the
-capabilities summary are sent only when they use the assistant:
+data. When Odoo loads for such an employee, the browser only downloads the chat window from Botify and sends nothing
+about the employee. Who the employee is is sent when they open the chat, or when a time-off notification is pending
+for them (with that notification). The open page is sent with each chat message. Chat messages, the records the
+assistant reads and the capabilities summary are sent only when they use the assistant:
 
 | What | Details |
 |---|---|
@@ -73,6 +74,9 @@ Where the code enforces this:
   in the **Botify Agent user** group. `identity()` lists exactly the identity fields above.
 - `botify_agent/static/src/botify_service.js`, `start()`: the browser loads the Botify chat only for group members and
   only after `/botify_agent/v1/identity` succeeds; `pageContext()` builds the page details above.
+- `packages/widget/src/client/frame.ts` (the chat window, in the Botify repository): `openSession()` and
+  `relayNotifications()` start the Botify session, which carries the identity, only when the chat opens or a
+  notification is pending; the open page goes only with `POST messages`.
 - `botify_agent/services/capabilities.py`, `manifest()`: builds the capabilities summary only from what the employee
   can read, under the module's privacy settings.
 - `botify_agent/models/botify_event.py`: `_botify_notify()` records no time-off event unless notifications are on,

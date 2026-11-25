@@ -258,8 +258,9 @@ export const botifyAgentService = {
     env.bus.addEventListener('ACTION_MANAGER:UI-UPDATED', setContext);
 
     // Notifications: Odoo keeps the events; the bus only says "look". Every
-    // relay tells Botify, even with nothing leased: another tab may have taken
-    // the events, and an empty notify still refreshes this tab's unread count.
+    // relay tells the frame, even with nothing leased: another tab may have taken
+    // the events. An empty notify refreshes this tab's unread count only once its
+    // chat has a session; it never starts one (no identity on page loads).
     let relaying = null;
     const relay = () => {
       if (!ready) return;

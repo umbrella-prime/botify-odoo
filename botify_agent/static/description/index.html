@@ -35,9 +35,10 @@
     enters the Botify connection</b> (Botify API URL, installation key and installation secret) in
     Settings, Botify Agent, and ticks <i>Botify agent</i>. Until then the module refuses every request and
     no chat is loaded. After that, only employees in the group <i>Botify Agent user</i> send data. When Odoo loads for
-    such an employee, the browser sends who the employee is, the open page and any pending time-off notifications,
-    even if they never open the chat. Chat messages, the records the assistant reads and the capabilities summary
-    are sent only when they use the assistant:
+    such an employee, the browser only downloads the chat window from Botify and sends nothing about the employee.
+    Who the employee is is sent when they open the chat, or when a time-off notification is pending for them (with that
+    notification). The open page is sent with each chat message. Chat messages, the records the assistant reads and the
+    capabilities summary are sent only when they use the assistant:
   </p>
   <ul style="padding-left:20px;">
     <li><b>Who the employee is:</b> the Odoo database name, user ID, partner ID, name, language, time zone, current and allowed company IDs and the current company name, signed for a short time with the installation secret.</li>
