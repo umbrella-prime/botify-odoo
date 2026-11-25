@@ -1,0 +1,77 @@
+<section style="max-width:960px;margin:0 auto;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;color:#0f172a;line-height:1.6;">
+
+  <div style="text-align:center;">
+    <h1 style="font-size:34px;margin:0 0 8px;color:#0f172a;">Botify AI Assistant</h1>
+    <p style="font-size:18px;color:#475569;margin:0 0 24px;">
+      An AI assistant inside Odoo that answers questions and does the work for each employee,
+      with that employee's own Odoo permissions.
+    </p>
+    <img src="banner.png" alt="Botify AI Assistant for Odoo 19 and 20" style="max-width:100%;border-radius:12px;"/>
+  </div>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">What it does</h2>
+  <ul style="padding-left:20px;">
+    <li>Answers questions about your Odoo data in plain language: sales, CRM, invoices, purchases, inventory, projects, timesheets, time off and more.</li>
+    <li>Finds records, counts and sums them, and opens the record you are looking for.</li>
+    <li>Creates and updates records, confirms quotations and runs approved business actions when your administrator allows it.</li>
+    <li>Tells employees when their time off is approved or refused (when the Time Off app is installed and the administrator turns it on).</li>
+    <li>Works in Arabic and English, from a floating chat button in the Odoo backend.</li>
+  </ul>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Safe by design</h2>
+  <ul style="padding-left:20px;">
+    <li><b>Each employee's own permissions.</b> Every read and change runs as the signed-in employee, under their Odoo access rights and record rules. The assistant never sees more than the employee can.</li>
+    <li><b>Changes wait for the employee's approval.</b> The assistant shows each change and runs it only after the employee confirms, unless the administrator turns on <i>Allow simple changes without confirmation</i> for low-risk changes (off by default). High-impact changes, deletions, financial operations and messages to external people always need confirmation.</li>
+    <li><b>Read-only until you decide.</b> A fresh install can only read. The administrator turns on each kind of change in Settings.</li>
+    <li><b>Only the people you choose.</b> Only members of the group <i>Botify Agent user</i> see the assistant.</li>
+    <li><b>Hide what is sensitive.</b> Administrators can hide extra models and fields, and protect models from changes.</li>
+    <li><b>Full log in Odoo.</b> Every operation is recorded in Odoo under Settings, Administration, Botify Agent, Operations.</li>
+  </ul>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Data sent to Botify</h2>
+  <p>
+    This module connects your Odoo to <b>Botify</b>, an external AI service run by Umbrella Prime
+    (<a href="https://botifyarabia.ai">botifyarabia.ai</a>). <b>Nothing is sent to Botify until an administrator
+    enters the Botify connection</b> (Botify API URL, installation key and installation secret) in
+    Settings, Botify Agent, and ticks <i>Botify agent</i>. Until then the module refuses every request and
+    no chat is loaded. After that, only employees in the group <i>Botify Agent user</i> send data. When Odoo loads for
+    such an employee, the browser sends who the employee is, the open page and any pending time-off notifications,
+    even if they never open the chat. Chat messages, the records the assistant reads and the capabilities summary
+    are sent only when they use the assistant:
+  </p>
+  <ul style="padding-left:20px;">
+    <li><b>Who the employee is:</b> the Odoo database name, user ID, partner ID, name, language, time zone, current and allowed company IDs and the current company name, signed for a short time with the installation secret.</li>
+    <li><b>Where the employee is:</b> the model, record ID, record name, menu action and view type of the Odoo page that is open, and the companies selected in Odoo.</li>
+    <li><b>What the employee can use:</b> the Odoo apps and menus they can open, the models and fields they can read, and their own employee name, manager and department.</li>
+    <li><b>Chat messages</b> the employee writes to the assistant.</li>
+    <li><b>The records the assistant reads</b> to answer, read with that employee's access only, and the result of each change the employee approves.</li>
+    <li><b>Time-off decisions</b> (leave type, dates, days and who decided), only when the administrator turns on time-off notifications.</li>
+  </ul>
+  <p>
+    The Odoo server itself never connects to Botify: the employee's browser exchanges this data with Botify
+    through the chat window. The installation secret stays on the Odoo server and is never sent to employees' browsers or to Botify.
+    No Odoo password or API key is sent. Botify processes the messages and records with an AI model to answer the employee.
+  </p>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Requirements</h2>
+  <ul style="padding-left:20px;">
+    <li>Odoo <b>19</b> or <b>20</b>, <b>Community</b> or <b>Enterprise</b>.</li>
+    <li><b>Odoo.sh or on-premise.</b> Odoo Online does not allow custom Python modules, so this module cannot be installed there.</li>
+    <li>A Botify workspace with an Odoo connection. Get one at <a href="https://botifyarabia.ai">botifyarabia.ai</a>.</li>
+    <li>Depends only on the standard <i>base</i>, <i>web</i>, <i>mail</i> and <i>bus</i> modules.</li>
+  </ul>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Setup</h2>
+  <ol style="padding-left:20px;">
+    <li>In Botify, open your assistant, then <b>Odoo</b>, <b>Connect an Odoo</b>. Enter your Odoo address and database name, then create the secret and copy the Botify API URL, installation key and installation secret.</li>
+    <li>Install <b>Botify AI Assistant</b> from Apps.</li>
+    <li>In Odoo <b>Settings, Botify Agent</b>, paste the three values, tick <i>Botify agent</i>, and choose which kinds of change to allow.</li>
+    <li>Add employees to the group <i>Botify Agent user</i>. They see the Botify button after reloading Odoo.</li>
+  </ol>
+
+  <h2 style="font-size:24px;margin:40px 0 12px;">Support</h2>
+  <p>
+    Email <a href="mailto:hello@umbrellaprime.sa">hello@umbrellaprime.sa</a> or visit
+    <a href="https://botifyarabia.ai">botifyarabia.ai</a>. This module is free and licensed under LGPL-3.
+  </p>
+</section>
