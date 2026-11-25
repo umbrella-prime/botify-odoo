@@ -1,0 +1,1205 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* botify_agent
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "%s changed since it was read"
+msgstr "تغيّر %s منذ آخر قراءة له"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_method.py:0
+#, python-format
+msgid "%s is a generic ORM method, not a business action"
+msgstr "الطريقة %s عامة في ORM ولا تمثّل إجراء عمل"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "%s is not a declared param"
+msgstr "الوسيط %s غير معرّف"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_method.py:0
+#, python-format
+msgid "%s is not a model name"
+msgstr "%s ليس اسم نموذج"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "%s is required"
+msgstr "الوسيط %s مطلوب"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+#, python-format
+msgid "%s operations are not enabled in this Odoo"
+msgstr "إجراءات الفئة %s غير مفعّلة في Odoo"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+#, python-format
+msgid "%s operations require employee confirmation"
+msgstr "إجراءات الفئة %s تتطلب موافقة الموظف"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/classify.py:0
+#, python-format
+msgid "%s: split it into separate changes"
+msgstr "%s: قسّم العملية إلى تغييرات منفصلة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "a batch takes 1 to %d rows"
+msgstr "يجب أن يكون عدد صفوف الدفعة بين 1 و%d"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/guard.py:0
+msgid "a JSON request is required"
+msgstr "يجب أن يكون الطلب بصيغة JSON"
+
+#. module: botify_agent
+#: model:ir.model.constraint,message:botify_agent.constraint_botify_agent_method_unique_method
+msgid "A method is registered once per model."
+msgstr "يمكن تسجيل الطريقة مرة واحدة لكل نموذج."
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "a requested field is hidden by this installation"
+msgstr "أحد الحقول المطلوبة مخفي في إعدادات هذا الربط"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "a row key is 1 to 200 characters"
+msgstr "يجب أن يتراوح طول مفتاح الصف بين 1 و200 حرف"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/errors.py:0
+msgid "access denied"
+msgstr "تم رفض الوصول"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "acks must be a list of at most 20 receipts"
+msgstr "يجب أن يحتوي acks على قائمة تضم 20 إيصالًا على الأكثر"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_refused_read_fields
+msgid "Additional fields hidden from the agent"
+msgstr "حقول إضافية مخفية عن المساعد"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_refused_read_models
+msgid "Additional models hidden from the agent"
+msgstr "نماذج إضافية مخفية عن المساعد"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_refused_write_models
+msgid "Additional models protected from writes"
+msgstr "نماذج إضافية محمية من التعديل"
+
+#. module: botify_agent
+#: model:ir.actions.act_window,name:botify_agent.action_botify_methods
+msgid "Agent business actions"
+msgstr "إجراءات عمل المساعد"
+
+#. module: botify_agent
+#: model:ir.actions.act_window,name:botify_agent.action_botify_field_rules
+msgid "Agent field risks"
+msgstr "مخاطر حقول المساعد"
+
+#. module: botify_agent
+#: model:ir.actions.act_window,name:botify_agent.action_botify_events
+msgid "Agent notifications"
+msgstr "إشعارات المساعد"
+
+#. module: botify_agent
+#: model:ir.actions.act_window,name:botify_agent.action_botify_operations
+msgid "Agent operations"
+msgstr "عمليات المساعد"
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_res_config_settings__botify_allow_simple_changes_without_confirmation
+msgid "Allow enabled low-risk changes without asking employees to confirm when Botify also allows it."
+msgstr "اسمح بالتغييرات منخفضة المخاطر المفعّلة دون طلب موافقة الموظفين إذا كان بوتيفاي يسمح بها أيضًا."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_allow_simple_changes_without_confirmation
+msgid "Allow simple changes without confirmation"
+msgstr "اسمح بالتغييرات البسيطة دون موافقة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "already created by an earlier run"
+msgstr "أُنشئ في تنفيذ سابق"
+
+#. module: botify_agent
+#: model:ir.model.constraint,message:botify_agent.constraint_botify_agent_event_unique_event
+msgid "An event is delivered once."
+msgstr "يُسلّم كل حدث مرة واحدة."
+
+#. module: botify_agent
+#: model:ir.model.constraint,message:botify_agent.constraint_botify_agent_operation_unique_call
+msgid "An operation grant is used once."
+msgstr "يُستخدم إذن العملية مرة واحدة."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__approval_id
+msgid "Approval Id"
+msgstr "معرّف الموافقة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "args must be an object"
+msgstr "يجب أن تكون args كائنًا"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "at most %d fields"
+msgstr "الحد الأقصى للحقول هو %d"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/classify.py:0
+#, python-format
+msgid "at most %d records"
+msgstr "الحد الأقصى للسجلات هو %d"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "at most 20 params"
+msgstr "الحد الأقصى للوسائط هو 20"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__attempts
+msgid "Attempts"
+msgstr "عدد المحاولات"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "bad signature"
+msgstr "التوقيع غير صالح"
+
+#. module: botify_agent
+#. odoo-javascript
+#: code:addons/botify_agent/static/src/botify_service.js:0
+msgid "Botify"
+msgstr "بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.module.module,shortdesc:base.module_botify_agent
+#: model:ir.ui.menu,name:botify_agent.menu_botify_root
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Botify Agent"
+msgstr "مساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_enabled
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Botify agent"
+msgstr "مساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model,name:botify_agent.model_botify_agent_method
+msgid "Botify agent business method"
+msgstr "طريقة عمل لمساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model,name:botify_agent.model_botify_agent_field_rule
+msgid "Botify agent field risk rule"
+msgstr "قاعدة مخاطر الحقول لمساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model,name:botify_agent.model_botify_agent_event
+msgid "Botify agent notification event"
+msgstr "حدث إشعار مساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model,name:botify_agent.model_botify_agent_operation
+msgid "Botify agent operation"
+msgstr "عملية مساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:res.groups,name:botify_agent.group_botify_user
+msgid "Botify Agent user"
+msgstr "مستخدم مساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_api_url
+msgid "Botify API URL"
+msgstr "عنوان API لبوتيفاي"
+
+#. module: botify_agent
+#. odoo-javascript
+#: code:addons/botify_agent/static/src/botify_service.js:0
+msgid "Botify chat"
+msgstr "محادثة بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__botify_session_id
+msgid "Botify Session Id"
+msgstr "معرّف جلسة بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.actions.server,name:botify_agent.ir_cron_botify_event_gc_ir_actions_server
+msgid "Botify: notification expiry and retention"
+msgstr "بوتيفاي: انتهاء صلاحية الإشعارات والاحتفاظ بها"
+
+#. module: botify_agent
+#: model:ir.actions.server,name:botify_agent.ir_cron_botify_operation_gc_ir_actions_server
+msgid "Botify: operation log retention"
+msgstr "بوتيفاي: مدة الاحتفاظ بسجل التدقيق"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "business action arguments are plain values"
+msgstr "تقبل إجراءات العمل قيمًا بسيطة في الوسائط"
+
+#. module: botify_agent
+#: model:ir.ui.menu,name:botify_agent.menu_botify_methods
+msgid "Business actions"
+msgstr "إجراءات العمل"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__call_id
+msgid "Call Id"
+msgstr "معرّف الاستدعاء"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_sale_order_action_cancel
+msgid "Cancel the sales order"
+msgstr "ألغِ أمر البيع"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_stock_picking_action_assign
+msgid "Check availability and reserve products"
+msgstr "تحقّق من التوفر واحجز المنتجات"
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_res_config_settings__botify_refused_read_fields
+msgid "Comma-separated model.field names. Botify cannot see, read, sort, filter or group by these fields."
+msgstr "أدخل الأسماء بصيغة model.field وافصل بينها بفواصل. لن يتمكن بوتيفاي من رؤية هذه الحقول أو قراءتها أو استخدامها للترتيب أو التصفية أو التجميع."
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_res_config_settings__botify_refused_read_models
+msgid "Comma-separated technical model names. Botify cannot discover or read these models."
+msgstr "أدخل الأسماء التقنية للنماذج وافصل بينها بفواصل. لن يتمكن بوتيفاي من العثور على هذه النماذج أو قراءتها."
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_res_config_settings__botify_refused_write_models
+msgid "Comma-separated technical model names. Botify refuses changes and business actions on these models."
+msgstr "أدخل الأسماء التقنية للنماذج وافصل بينها بفواصل. يمنع بوتيفاي التغييرات وإجراءات العمل على هذه النماذج."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__company_id
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_sale_order_action_confirm
+msgid "Confirm the quotation into a sales order"
+msgstr "أكّد عرض السعر لتحويله إلى أمر بيع"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_purchase_order_button_confirm
+msgid "Confirm the request for quotation into a purchase order"
+msgstr "أكّد طلب عرض السعر لتحويله إلى أمر شراء"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Connection"
+msgstr "الربط"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__create_uid
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__create_uid
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__create_uid
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__create_uid
+msgid "Created by"
+msgstr "أنشأه"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__create_date
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__create_date
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__create_date
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__create_date
+msgid "Created on"
+msgstr "تاريخ الإنشاء"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/guard.py:0
+msgid "cross-site request refused"
+msgstr "تم رفض طلب من موقع آخر"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_allow_destructive
+msgid "Deletions and cancellations"
+msgstr "الحذف والإلغاء"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_event__state__delivered
+msgid "Delivered"
+msgstr "تم التسليم"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__delivered_at
+msgid "Delivered At"
+msgstr "وقت التسليم"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_event__state__delivering
+msgid "Delivering"
+msgstr "قيد التسليم"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__description
+msgid "Description"
+msgstr "الوصف"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_field_rule__risk_class__destructive
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_method__risk_class__destructive
+msgid "Destructive"
+msgstr "حذف أو إلغاء"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "Did you mean: %s?"
+msgstr "هل تقصد %s؟"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__display_name
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__display_name
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__display_name
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_operation__status__done
+msgid "Done"
+msgstr "مكتمل"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Employees in the group Botify Agent user get the assistant, acting with their own Odoo permissions."
+msgstr "يمكن لأعضاء مجموعة «مستخدم مساعد بوتيفاي» استخدام المساعد بصلاحياتهم في Odoo."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__error_code
+msgid "Error Code"
+msgstr "رمز الخطأ"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__error_message
+msgid "Error Message"
+msgstr "رسالة الخطأ"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__event_id
+msgid "Event Id"
+msgstr "معرّف الحدث"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_method__record_arity__one
+msgid "Exactly one record"
+msgstr "سجل واحد فقط"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_event__state__expired
+msgid "Expired"
+msgstr "انتهت الصلاحية"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_field_rule__risk_class__external_communication
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_method__risk_class__external_communication
+msgid "External Communication"
+msgstr "تواصل خارجي"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__facts_json
+msgid "Facts Json"
+msgstr "بيانات الحدث بصيغة JSON"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_event__state__failed
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_operation__status__failed
+#: model_terms:ir.ui.view,arch_db:botify_agent.botify_operation_view_search
+msgid "Failed"
+msgstr "فشل"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__field
+msgid "Field"
+msgstr "الحقل"
+
+#. module: botify_agent
+#: model:ir.ui.menu,name:botify_agent.menu_botify_field_rules
+msgid "Field risks"
+msgstr "مخاطر الحقول"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "fields are plain field names"
+msgstr "يجب أن تحتوي fields على أسماء حقول بسيطة"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_field_rule__risk_class__financial
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_method__risk_class__financial
+msgid "Financial"
+msgstr "مالي"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_allow_financial
+msgid "Financial operations"
+msgstr "عمليات مالية"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "grant expired"
+msgstr "انتهت صلاحية الإذن"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "grant lifetime invalid"
+msgstr "مدة صلاحية الإذن غير صالحة"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_field_rule__risk_class__high_write
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_method__risk_class__high_write
+msgid "High Write"
+msgstr "تغيير كبير الأثر"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_allow_high_write
+msgid "High-impact changes"
+msgstr "تغييرات كبيرة الأثر"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__id
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__id
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__id
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__id
+msgid "ID"
+msgstr "المعرّف"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "ids must be record ids"
+msgstr "يجب أن تحتوي ids على معرّفات سجلات"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "ids must list 1 to %d records"
+msgstr "يجب أن يكون عدد معرّفات السجلات في ids بين 1 و%d"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_installation_key
+msgid "Installation key"
+msgstr "مفتاح الربط"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_secret
+msgid "Installation secret"
+msgstr "سر الربط"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/errors.py:0
+msgid "invalid"
+msgstr "القيمة غير صالحة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid aggregates"
+msgstr "عمليات التجميع غير صالحة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "invalid approval id"
+msgstr "معرّف الموافقة غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid batch row"
+msgstr "صف الدفعة غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid domain"
+msgstr "شرط البحث غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid domain operator"
+msgstr "عامل المقارنة في شرط البحث غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid domain term"
+msgstr "أحد عناصر شرط البحث غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid field name"
+msgstr "اسم الحقل غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "invalid grant"
+msgstr "الإذن غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid groupby"
+msgstr "إعداد التجميع groupby غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "invalid order"
+msgstr "إعداد الترتيب غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "invalid param name %s"
+msgstr "اسم الوسيط %s غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "is too long"
+msgstr "قيمته أطول من الحد المسموح"
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_botify_agent_method__params_schema
+msgid "JSON Schema (strict subset) of the keyword arguments; unknown arguments are refused."
+msgstr "مخطط JSON للوسائط المسمّاة (يدعم مجموعة محددة من القواعد). تُرفض الوسائط غير المعرّفة."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_retention_days
+msgid "Keep the operation log (days)"
+msgstr "مدة الاحتفاظ بسجل التدقيق (بالأيام)"
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_botify_agent_operation__result_json
+msgid "Kept briefly so a replayed grant gets the same answer."
+msgstr "تُحفظ النتيجة لفترة قصيرة لإرجاعها عند إعادة إرسال الإذن نفسه."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__kind
+msgid "Kind"
+msgstr "النوع"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__last_error
+msgid "Last Error"
+msgstr "آخر خطأ"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__write_uid
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__write_uid
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__write_uid
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__write_uid
+msgid "Last Updated by"
+msgstr "آخر من عدّله"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__write_date
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__write_date
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__write_date
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__write_date
+msgid "Last Updated on"
+msgstr "تاريخ آخر تعديل"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__latency_ms
+msgid "Latency Ms"
+msgstr "زمن الاستجابة (مللي ثانية)"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__lease_until
+msgid "Lease Until"
+msgstr "محجوز للتسليم حتى"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_field_rule__risk_class__low_write
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_method__risk_class__low_write
+msgid "Low Write"
+msgstr "تغيير منخفض المخاطر"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_allow_low_write
+msgid "Low-risk changes"
+msgstr "تغييرات منخفضة المخاطر"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "malformed payload"
+msgstr "صيغة البيانات غير صالحة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "malformed token"
+msgstr "صيغة الرمز غير صالحة"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_crm_lead_action_set_won
+msgid "Mark the opportunity as won"
+msgstr "حدّد الفرصة على أنها ناجحة"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__max_records
+msgid "Max Records"
+msgstr "الحد الأقصى للسجلات"
+
+#. module: botify_agent
+#: model:res.groups,comment:botify_agent.group_botify_user
+msgid "May use the Botify agent inside Odoo, always with their own Odoo permissions."
+msgstr "يمكنه استخدام مساعد بوتيفاي داخل Odoo بصلاحياته الخاصة في Odoo."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_allow_external_communication
+msgid "Messages to external people"
+msgstr "رسائل لأشخاص خارج شركتك"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__method
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__method
+msgid "Method"
+msgstr "الطريقة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/guard.py:0
+msgid "missing or invalid CSRF token"
+msgstr "رمز CSRF مفقود أو غير صالح"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__model
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__model
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__model
+msgid "Model"
+msgstr "النموذج"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "model %s does not exist"
+msgstr "النموذج %s غير موجود"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "must be <= %s"
+msgstr "يجب ألا تتجاوز قيمته %s"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "must be >= %s"
+msgstr "يجب ألا تقل قيمته عن %s"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "must be a boolean"
+msgstr "يجب أن تكون قيمته منطقية"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "must be a number"
+msgstr "يجب أن تكون قيمته رقمًا"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "must be a string"
+msgstr "يجب أن تكون قيمته نصًا"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "must be an integer"
+msgstr "يجب أن تكون قيمته عددًا صحيحًا"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "must be one of %s"
+msgstr "يجب أن تكون قيمته إحدى القيم التالية: %s"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "name_search_batch takes 1 to at most %d texts"
+msgstr "يجب أن يكون عدد النصوص في name_search_batch بين 1 و%d"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.botify_event_view_search
+msgid "Not delivered"
+msgstr "لم يُسلّم"
+
+#. module: botify_agent
+#: model:ir.ui.menu,name:botify_agent.menu_botify_events
+msgid "Notifications"
+msgstr "الإشعارات"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+#, python-format
+msgid "Odoo classifies this operation as %s"
+msgstr "يصنّف Odoo هذه العملية ضمن الفئة %s"
+
+#. module: botify_agent
+#. odoo-javascript
+#: code:addons/botify_agent/static/src/botify_service.js:0
+msgid "Odoo could not answer"
+msgstr "تعذّر على Odoo الرد"
+
+#. module: botify_agent
+#. odoo-javascript
+#: code:addons/botify_agent/static/src/botify_service.js:0
+msgid "Odoo could not be reached"
+msgstr "تعذّر الاتصال بـ Odoo"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/errors.py:0
+#, python-format
+msgid "Odoo could not complete the operation (ref %s)"
+msgstr "تعذّر على Odoo إكمال العملية (المرجع %s)"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_method__record_arity__many
+msgid "One or more records"
+msgstr "سجل واحد أو أكثر"
+
+#. module: botify_agent
+#: model:ir.model.constraint,message:botify_agent.constraint_botify_agent_field_rule_unique_field
+msgid "One rule per field."
+msgstr "يمكن إضافة قاعدة واحدة لكل حقل."
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "only public business methods can be called"
+msgstr "يمكن استدعاء طرق العمل العامة فقط"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_method.py:0
+msgid "Only public methods can be registered."
+msgstr "يمكن تسجيل الطرق العامة فقط."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__operation
+msgid "Operation"
+msgstr "العملية"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Operation classes"
+msgstr "فئات العمليات"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Operation log"
+msgstr "سجل التدقيق"
+
+#. module: botify_agent
+#: model:ir.ui.menu,name:botify_agent.menu_botify_operations
+msgid "Operations"
+msgstr "العمليات"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "param %s enum must be at most 20 strings or numbers"
+msgstr "يجب ألا تتجاوز قائمة enum للوسيط %s 20 قيمة نصية أو رقمية"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+#, python-format
+msgid "param %s has no valid type"
+msgstr "نوع الوسيط %s غير صالح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "params must be {\"type\": \"object\", \"properties\": {...}}"
+msgstr "يجب أن تكون params بالصيغة التالية: {\"type\": \"object\", \"properties\": {...}}"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__params_schema
+msgid "Params Schema"
+msgstr "مخطط الوسائط"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_event__state__pending
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_account_move_action_post
+msgid "Post the draft invoice or entry"
+msgstr "رحّل مسودة الفاتورة أو القيد"
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_botify_agent_method__method
+msgid "Public method name, e.g. action_confirm"
+msgstr "اسم الطريقة العامة، مثل action_confirm"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Reads are subject to the employee's Odoo rights and the installation's read protections."
+msgstr "تخضع القراءة لصلاحيات الموظف في Odoo ولقيود القراءة المحددة في إعدادات الربط."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__record_arity
+msgid "Record Arity"
+msgstr "عدد السجلات المقبول"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__record_ids
+msgid "Record Ids"
+msgstr "معرّفات السجلات"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_method.py:0
+msgid "Record limits must be 1 for one record, at most 50 otherwise."
+msgstr "اضبط الحد على 1 عند اختيار سجل واحد، وعلى 50 أو أقل عند اختيار سجل واحد أو أكثر."
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/errors.py:0
+msgid "record not found"
+msgstr "لم يُعثر على السجل"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_event.py:0
+msgid "rejected by Botify"
+msgstr "رفض بوتيفاي الإشعار"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/params.py:0
+msgid "required must list declared params"
+msgstr "يجب أن تسرد required الوسائط المعرّفة"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_account_move_button_draft
+msgid "Reset the entry to draft"
+msgstr "أعد القيد إلى المسودة"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__result_json
+msgid "Result Json"
+msgstr "النتيجة بصيغة JSON"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_field_rule__risk_class
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_method__risk_class
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__risk_class
+msgid "Risk Class"
+msgstr "فئة المخاطر"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_operation__status__aborted
+msgid "Rolled back"
+msgstr "تم التراجع"
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_botify_agent_operation__status
+msgid "Rolled back: the request's transaction did not commit, so nothing it did was kept; recorded in a separate transaction."
+msgstr "تم التراجع عن المعاملة. لم تُحفظ تغييرات الطلب، وسُجّل التراجع في معاملة منفصلة."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__run_id
+msgid "Run Id"
+msgstr "معرّف التنفيذ"
+
+#. module: botify_agent
+#: model:ir.model.fields.selection,name:botify_agent.selection__botify_agent_operation__status__running
+msgid "Running"
+msgstr "قيد التنفيذ"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "some records do not exist or were deleted"
+msgstr "بعض السجلات غير موجودة أو حُذفت"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__status
+msgid "Status"
+msgstr "الحالة"
+
+#. module: botify_agent
+#: model:ir.model.fields,help:botify_agent.field_botify_agent_method__model
+msgid "Technical model name, e.g. sale.order"
+msgstr "الاسم التقني للنموذج، مثل sale.order"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "texts must be 1 to 200 characters"
+msgstr "يجب أن يتراوح طول كل نص بين 1 و200 حرف"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "the Botify agent is not enabled in this Odoo"
+msgstr "مساعد بوتيفاي غير مفعّل في Odoo"
+
+#. module: botify_agent
+#: model:ir.module.module,summary:base.module_botify_agent
+msgid "The Botify AI agent inside Odoo, acting as each employee with their own Odoo permissions"
+msgstr "مساعد بوتيفاي الذكي داخل Odoo، يستخدم صلاحيات كل موظف في Odoo لتنفيذ إجراءاته."
+
+#. module: botify_agent
+#. odoo-javascript
+#: code:addons/botify_agent/static/src/botify_service.js:0
+msgid "the Odoo session expired"
+msgstr "انتهت صلاحية جلسة Odoo"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_operation.py:0
+msgid "The Odoo transaction was rolled back: nothing was changed."
+msgstr "تراجع Odoo عن المعاملة ولم يحفظ أي تغييرات."
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_method.py:0
+msgid "The params schema is not valid JSON."
+msgstr "مخطط الوسائط بصيغة JSON غير صالحة."
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/errors.py:0
+msgid "the records are being changed by someone else; try again"
+msgstr "هناك شخص آخر يعدّل السجلات. حاول مرة أخرى."
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "the selected companies are not allowed for this user"
+msgstr "لا يملك هذا المستخدم صلاحية الوصول إلى الشركات المحددة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/classify.py:0
+msgid "this action takes exactly one record"
+msgstr "يقبل هذا الإجراء سجلًا واحدًا فقط"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "this model is hidden by this installation"
+msgstr "هذا النموذج مخفي في إعدادات هذا الربط"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "this model is not available to the agent"
+msgstr "هذا النموذج غير متاح للمساعد"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "this operation belongs to another user"
+msgstr "هذه العملية تخص مستخدمًا آخر"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "this operation is already running"
+msgstr "هذه العملية قيد التنفيذ بالفعل"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "this operation is still running"
+msgstr "هذه العملية لا تزال قيد التنفيذ"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "this operation was granted for another Odoo session"
+msgstr "صدرت الموافقة على هذه العملية لجلسة Odoo أخرى"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "token too long"
+msgstr "الرمز أطول من الحد المسموح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+msgid "too many values in a domain term"
+msgstr "أحد عناصر شرط البحث يتجاوز الحد الأقصى للقيم"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "unknown field %s on %s.%s Call odoo.describe_model to see the real fields."
+msgstr "الحقل %s غير موجود في النموذج %s.%s استخدم odoo.describe_model للاطلاع على الحقول المتاحة."
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "unknown risk class"
+msgstr "فئة المخاطر غير معروفة"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/grant.py:0
+msgid "unsupported grant version"
+msgstr "إصدار الإذن غير مدعوم"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__user_id
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_operation__user_id
+msgid "User"
+msgstr "المستخدم"
+
+#. module: botify_agent
+#: model:botify.agent.method,description:botify_agent.method_stock_picking_button_validate
+msgid "Validate the transfer"
+msgstr "أكّد التحويل"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "value of %s is too long"
+msgstr "قيمة %s أطول من الحد المسموح"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/services/executor.py:0
+#, python-format
+msgid "values must set 1 to %d fields"
+msgstr "يجب أن تحدد values قيمًا لعدد من الحقول بين 1 و%d"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "What the agent may do (Botify must allow it too)"
+msgstr "ما يمكن للمساعد فعله (يتطلب السماح به في بوتيفاي أيضًا)"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/controllers/main.py:0
+msgid "you are not allowed to use the Botify agent"
+msgstr "ليست لديك صلاحية استخدام مساعد بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_botify_agent_event__botify_leave_type_id
+msgid "Botify Leave Type"
+msgstr "نوع الإجازة في بوتيفاي"
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_excluded_leave_type_options
+msgid "Excluded leave types"
+msgstr "أنواع الإجازات المستثناة"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Send employees a Botify notification when their time off is approved or refused."
+msgstr "أرسل للموظفين إشعارًا من بوتيفاي عند الموافقة على طلب إجازاتهم أو رفضه."
+
+#. module: botify_agent
+#: model:ir.model.fields,field_description:botify_agent.field_res_config_settings__botify_leave_notifications_enabled
+msgid "Send time-off notifications"
+msgstr "أرسل إشعارات الإجازات"
+
+#. module: botify_agent
+#: model_terms:ir.ui.view,arch_db:botify_agent.res_config_settings_view_form
+msgid "Time Off"
+msgstr "الإجازات"
+
+#. module: botify_agent
+#. odoo-python
+#: code:addons/botify_agent/models/botify_event.py:0
+msgid "Time-off notification suppressed"
+msgstr "لم يُرسل إشعار الإجازة وفقًا للإعدادات"

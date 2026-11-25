@@ -1,0 +1,8 @@
+id,name,model_id,group_id/id,operation,domain
+access_botify_method_user,botify.agent.method user,botify.agent.method,botify_agent.group_botify_user,r,
+access_botify_method_admin,botify.agent.method admin,botify.agent.method,base.group_system,crud,
+access_botify_field_rule_user,botify.agent.field_rule user,botify.agent.field_rule,botify_agent.group_botify_user,r,
+access_botify_field_rule_admin,botify.agent.field_rule admin,botify.agent.field_rule,base.group_system,crud,
+access_botify_operation_admin,botify.agent.operation admin,botify.agent.operation,base.group_system,r,
+access_botify_event_admin,botify.agent.event admin,botify.agent.event,base.group_system,r,
+access_botify_leave_type_option_admin,botify.agent.leave.type.option admin,botify.agent.leave.type.option,base.group_system,cr,

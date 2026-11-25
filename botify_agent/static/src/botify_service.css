@@ -1,0 +1,28 @@
+.o_botify_widget {
+  position: fixed;
+  inset-block-end: 1rem;
+  inset-inline-end: 1rem;
+  z-index: 2147483000;
+}
+
+.o_botify_widget iframe {
+  position: absolute;
+  inset-block-end: calc(100% + 1rem);
+  inset-inline-end: 0;
+  width: min(380px, calc(100vw - 2rem));
+  height: min(680px, calc(100dvh - 5rem));
+  border: 0;
+}
+
+.o_botify_widget [hidden] {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .o_botify_widget iframe {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+  }
+}

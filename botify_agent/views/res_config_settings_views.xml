@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.botify_agent</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Botify Agent" string="Botify Agent" name="botify_agent" groups="base.group_system">
+                    <block title="Connection" name="botify_connection">
+                        <setting id="botify_enabled_setting" string="Botify agent"
+                                 help="Employees in the group Botify Agent user get the assistant, acting with their own Odoo permissions.">
+                            <field name="botify_enabled"/>
+                            <div class="content-group mt16">
+                                <div><label for="botify_api_url" class="o_light_label"/><field name="botify_api_url" placeholder="https://api.botify.example"/></div>
+                                <div><label for="botify_installation_key" class="o_light_label"/><field name="botify_installation_key" placeholder="wsk_…"/></div>
+                                <div><label for="botify_secret" class="o_light_label"/><field name="botify_secret" password="True"/></div>
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="What the agent may do (Botify must allow it too)" name="botify_rollout">
+                        <setting id="botify_classes_setting" string="Operation classes"
+                                 help="Reads are subject to the employee's Odoo rights and the installation's read protections.">
+                            <div class="content-group">
+                                <div><field name="botify_allow_low_write"/><label for="botify_allow_low_write" class="o_light_label"/></div>
+                                <div><field name="botify_allow_high_write"/><label for="botify_allow_high_write" class="o_light_label"/></div>
+                                <div><field name="botify_allow_financial"/><label for="botify_allow_financial" class="o_light_label"/></div>
+                                <div><field name="botify_allow_destructive"/><label for="botify_allow_destructive" class="o_light_label"/></div>
+                                <div><field name="botify_allow_external_communication"/><label for="botify_allow_external_communication" class="o_light_label"/></div>
+                            </div>
+                        </setting>
+                        <setting id="botify_allow_simple_changes_without_confirmation_setting">
+                            <field name="botify_allow_simple_changes_without_confirmation"/>
+                        </setting>
+                        <setting id="botify_refused_write_models_setting">
+                            <field name="botify_refused_write_models" placeholder="res.partner.category, product.template"/>
+                        </setting>
+                        <setting id="botify_retention_setting" string="Operation log">
+                            <field name="botify_retention_days"/>
+                        </setting>
+                    </block>
+                    <block title="Personal data privacy" name="botify_personal_data_privacy">
+                        <setting id="botify_personal_data_privacy_setting">
+                            <field name="botify_personal_data_privacy"/>
+                        </setting>
+                        <setting id="botify_allow_team_private_data_setting" invisible="botify_personal_data_privacy != 'strict'">
+                            <field name="botify_allow_team_private_data"/>
+                        </setting>
+                        <setting id="botify_refused_read_models_setting">
+                            <field name="botify_refused_read_models" placeholder="hr.payslip, res.partner.bank"/>
+                        </setting>
+                        <setting id="botify_refused_read_fields_setting">
+                            <field name="botify_refused_read_fields" placeholder="hr.version.wage, res.partner.phone"/>
+                        </setting>
+                    </block>
+                    <field name="botify_time_off_installed" invisible="1"/>
+                    <block title="Time Off" name="botify_time_off" invisible="not botify_time_off_installed">
+                        <setting id="botify_leave_notifications_setting"
+                                 help="Send employees a Botify notification when their time off is approved or refused.">
+                            <field name="botify_leave_notifications_enabled"/>
+                            <div class="content-group mt16" invisible="not botify_leave_notifications_enabled">
+                                <label for="botify_excluded_leave_type_options" class="o_light_label"/>
+                                <field name="botify_leave_type_options" invisible="1"/>
+                                <field name="botify_excluded_leave_type_options" widget="many2many_tags"
+                                       domain="[('id', 'in', botify_leave_type_options)]"
+                                       options="{'no_create': True}"/>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
