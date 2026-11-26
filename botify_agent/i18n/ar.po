@@ -220,8 +220,14 @@ msgstr "التوقيع غير صالح"
 #. module: botify_agent
 #. odoo-javascript
 #: code:addons/botify_agent/static/src/botify_service.js:0
-msgid "Botify"
-msgstr "بوتيفاي"
+msgid "Close Botify chat"
+msgstr "إغلاق محادثة بوتيفاي"
+
+#. module: botify_agent
+#. odoo-javascript
+#: code:addons/botify_agent/static/src/botify_service.js:0
+msgid "Open Botify chat"
+msgstr "فتح محادثة بوتيفاي"
 
 #. module: botify_agent
 #: model:ir.module.module,shortdesc:base.module_botify_agent

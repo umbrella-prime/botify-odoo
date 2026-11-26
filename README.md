@@ -34,8 +34,10 @@ questions to hello@umbrellaprime.sa.
    create the secret, and copy the Botify API URL, installation key and installation secret.
 2. In Odoo **Settings, Botify Agent**, paste the three values, tick **Botify agent**, and choose which kinds of change
    to allow (they must also be allowed in Botify).
-3. Add employees to the group **Botify Agent user**. They see the Botify button after reloading Odoo.
-4. If your Odoo sends a Content Security Policy, allow the Botify API origin in `frame-src`.
+3. Add employees to the group **Botify Agent user**. They see the Botify chat button after reloading Odoo.
+4. Optional: in Botify, change how the chat button looks (colour, side, size, icon or label, distance from the edge)
+   in the widget studio of this Odoo installation. Odoo shows the new look after a reload.
+5. If your Odoo sends a Content Security Policy, allow the Botify API origin in `frame-src`.
 
 ## Upgrade
 

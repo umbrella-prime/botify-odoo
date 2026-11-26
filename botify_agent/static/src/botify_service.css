@@ -1,28 +1,241 @@
+/*
+ * The website widget's launcher and panel (packages/widget/src/client/loader.ts),
+ * sized and coloured from the `--bw-*` variables the bridge sets from the validated look.
+ * Left/right are physical on purpose: the studio's position is a screen side, as on websites.
+ */
 .o_botify_widget {
+  --bw-primary: #4f46e5;
+  --bw-on-primary: #ffffff;
+  --bw-ring: #4f46e566;
+  --bw-glow: #4f46e555;
+  --bw-radius: 16px;
+  --bw-size: 56px;
+  --bw-ox: 20px;
+  --bw-oy: 20px;
+  --bw-width: 380px;
+}
+
+.o_botify_widget .launcher {
   position: fixed;
-  inset-block-end: 1rem;
-  inset-inline-end: 1rem;
+  bottom: var(--bw-oy);
   z-index: 2147483000;
-}
-
-.o_botify_widget iframe {
-  position: absolute;
-  inset-block-end: calc(100% + 1rem);
-  inset-inline-end: 0;
-  width: min(380px, calc(100vw - 2rem));
-  height: min(680px, calc(100dvh - 5rem));
+  box-sizing: border-box;
+  height: var(--bw-size);
+  min-width: var(--bw-size);
+  margin: 0;
+  padding: 0;
   border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: var(--bw-primary);
+  color: var(--bw-on-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow:
+    0 1px 2px rgba(15, 17, 26, 0.12),
+    0 4px 12px rgba(15, 17, 26, 0.12),
+    0 12px 28px -6px var(--bw-glow);
+  font: 600 15px/1.2 system-ui, -apple-system, "Segoe UI", "IBM Plex Sans Arabic", Tahoma, sans-serif;
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms ease;
 }
-
-.o_botify_widget [hidden] {
+.o_botify_widget .launcher:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 2px 4px rgba(15, 17, 26, 0.12),
+    0 8px 20px rgba(15, 17, 26, 0.14),
+    0 16px 36px -6px var(--bw-glow);
+}
+.o_botify_widget .launcher.pill:hover {
+  transform: translateY(-2px);
+}
+.o_botify_widget .launcher:active {
+  transform: scale(0.96);
+}
+.o_botify_widget .launcher:focus-visible {
+  outline: 3px solid var(--bw-primary);
+  outline-offset: 3px;
+}
+.o_botify_widget .launcher svg {
+  width: calc(var(--bw-size) * 0.46);
+  height: calc(var(--bw-size) * 0.46);
+  fill: currentColor;
+  flex: none;
+}
+.o_botify_widget .launcher.pill {
+  padding-inline: calc(var(--bw-size) * 0.3) calc(var(--bw-size) * 0.4);
+}
+.o_botify_widget .launcher.pill svg {
+  width: calc(var(--bw-size) * 0.4);
+  height: calc(var(--bw-size) * 0.4);
+}
+.o_botify_widget .launcher.enter {
+  animation: o_botify_pop 440ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.o_botify_widget .launcher.enter.bounce {
+  animation: o_botify_bounce 1700ms ease both;
+}
+.o_botify_widget .launcher.pulse::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: o_botify_pulse 2.4s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+.o_botify_widget .launcher .text {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Odoo's Bootstrap styles `.badge` too: every property the website badge sets is set here. */
+.o_botify_widget .launcher .badge {
+  position: absolute;
+  top: -4px;
+  inset-inline-end: -4px;
+  box-sizing: border-box;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: #dc2626;
+  color: #fff;
+  font: 600 12px/20px system-ui, sans-serif;
+  box-shadow: 0 0 0 2px #fff;
+}
+.o_botify_widget .launcher .badge[hidden] {
   display: none;
 }
 
+.o_botify_widget .o_botify_panel {
+  position: fixed;
+  bottom: calc(var(--bw-oy) + var(--bw-size) + 14px);
+  z-index: 2147483000;
+  width: var(--bw-width);
+  max-width: calc(100vw - 24px);
+  height: min(680px, calc(100vh - var(--bw-oy) - var(--bw-size) - 38px));
+  border: 0;
+  border-radius: var(--bw-radius);
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(15, 17, 26, 0.06),
+    0 2px 6px rgba(15, 17, 26, 0.05),
+    0 16px 36px -8px rgba(15, 17, 26, 0.2),
+    0 36px 72px -16px rgba(15, 17, 26, 0.26);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.94);
+  pointer-events: none;
+  transition:
+    opacity 160ms ease,
+    transform 200ms cubic-bezier(0.4, 0, 1, 1),
+    visibility 0s linear 200ms;
+}
+.o_botify_widget .o_botify_panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity 180ms ease,
+    transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s;
+}
+.o_botify_right .launcher,
+.o_botify_right .o_botify_panel {
+  right: var(--bw-ox);
+}
+.o_botify_left .launcher,
+.o_botify_left .o_botify_panel {
+  left: var(--bw-ox);
+}
+.o_botify_right .o_botify_panel {
+  transform-origin: calc(100% - var(--bw-size) / 2) calc(100% + 14px + var(--bw-size) / 2);
+}
+.o_botify_left .o_botify_panel {
+  transform-origin: calc(var(--bw-size) / 2) calc(100% + 14px + var(--bw-size) / 2);
+}
+
+@keyframes o_botify_pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes o_botify_bounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  14% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  22% {
+    transform: scale(1);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+  60% {
+    transform: translateY(0);
+  }
+  68% {
+    transform: translateY(-7px);
+  }
+  76%,
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes o_botify_pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--bw-ring);
+  }
+  75%,
+  100% {
+    box-shadow: 0 0 0 calc(var(--bw-size) * 0.3) transparent;
+  }
+}
+
+/* Phones: the chat takes the whole screen (its own header closes it), as on websites. */
 @media (max-width: 640px) {
-  .o_botify_widget iframe {
-    position: fixed;
+  .o_botify_widget .o_botify_panel {
     inset: 0;
     width: 100vw;
+    max-width: none;
     height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+    transform: translateY(24px);
+  }
+  .o_botify_widget .o_botify_panel.open {
+    transform: none;
+  }
+  .o_botify_widget .launcher.open,
+  .o_botify_widget .launcher.no-mobile {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .o_botify_widget .o_botify_panel,
+  .o_botify_widget .launcher {
+    transition: none;
+  }
+  .o_botify_widget .o_botify_panel,
+  .o_botify_widget .o_botify_panel.open {
+    transform: none;
+  }
+  .o_botify_widget .launcher,
+  .o_botify_widget .launcher::before {
+    animation: none !important;
   }
 }

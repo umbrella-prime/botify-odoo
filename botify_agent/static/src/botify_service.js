@@ -60,6 +60,93 @@ function isAck(data) {
   );
 }
 
+/**
+ * The launcher's look. The Botify frame sends the installation's widget studio
+ * settings in a `look` message; only these keys are read, each validated, and
+ * anything else keeps the default (the website widget's default look).
+ */
+const DEFAULT_LOOK = Object.freeze({
+  primary: '#4f46e5',
+  radius: 16,
+  position: 'right',
+  width: 'regular',
+  style: 'icon',
+  icon: 'chat',
+  label: '',
+  size: 'md',
+  offsetX: 20,
+  offsetY: 20,
+  hideOnMobile: false,
+  animation: 'none',
+});
+const LOOK_ENUMS = {
+  position: ['right', 'left'],
+  width: ['compact', 'regular', 'wide'],
+  style: ['icon', 'label'],
+  icon: ['chat', 'sparkle', 'help', 'headset'],
+  size: ['sm', 'md', 'lg'],
+  animation: ['none', 'pulse', 'bounce'],
+};
+/** The domain schema's ranges (`WidgetThemeSchema`, `WidgetLauncherSchema`). */
+const LOOK_RANGES = { radius: [0, 24], offsetX: [0, 120], offsetY: [0, 120] };
+const MAX_LABEL = 60;
+/** The website launcher's sizes (`loader.ts`). */
+const LAUNCHER_PX = { sm: 48, md: 56, lg: 64 };
+const PANEL_PX = { compact: 340, regular: 380, wide: 440 };
+/** Launcher glyphs (24×24, filled), as on the website. */
+const ICONS = {
+  chat: 'M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z',
+  sparkle:
+    'M11 2.5l2.2 6.3 6.3 2.2-6.3 2.2L11 19.5l-2.2-6.3L2.5 11l6.3-2.2zM18.5 15l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z',
+  help: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 17h-2v-2h2v2zm2.07-7.75-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26A2 2 0 0 0 14 9a2 2 0 0 0-4 0H8a4 4 0 0 1 8 0c0 .88-.36 1.68-.93 2.25z',
+  headset:
+    'M12 1a9 9 0 0 0-9 9v7a3 3 0 0 0 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h4v1h-7v2h6a3 3 0 0 0 3-3V10a9 9 0 0 0-9-9z',
+};
+const CLOSE_ICON =
+  'M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12 19 17.6 17.6 19 12 13.4 6.4 19 5 17.6 10.6 12 5 6.4z';
+
+/** A look from untrusted input: valid fields are kept, numbers clamped, the rest default. */
+export function readLook(value) {
+  const look = { ...DEFAULT_LOOK };
+  if (Object.prototype.toString.call(value) !== '[object Object]') return look;
+  const field = (key) => (Object.hasOwn(value, key) ? value[key] : undefined);
+  if (typeof field('primary') === 'string' && /^#[0-9a-fA-F]{6}$/.test(field('primary'))) {
+    look.primary = field('primary');
+  }
+  for (const [key, allowed] of Object.entries(LOOK_ENUMS)) {
+    if (allowed.includes(field(key))) look[key] = field(key);
+  }
+  for (const [key, [min, max]] of Object.entries(LOOK_RANGES)) {
+    const number = field(key);
+    if (typeof number === 'number' && Number.isFinite(number)) {
+      look[key] = Math.min(max, Math.max(min, Math.round(number)));
+    }
+  }
+  if (typeof field('hideOnMobile') === 'boolean') look.hideOnMobile = field('hideOnMobile');
+  if (typeof field('label') === 'string') look.label = field('label').trim().slice(0, MAX_LABEL);
+  return look;
+}
+
+/** Text on the primary colour: white while it keeps a 3:1 contrast, else dark ink (`look.ts`). */
+function onColor(hex) {
+  const channel = (start) => {
+    const value = Number.parseInt(hex.slice(start, start + 2), 16) / 255;
+    return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+  };
+  const luminance = 0.2126 * channel(1) + 0.7152 * channel(3) + 0.0722 * channel(5);
+  return 1.05 / (luminance + 0.05) >= 3 ? '#ffffff' : '#111318';
+}
+
+function icon(path) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  const shape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  shape.setAttribute('d', path);
+  svg.appendChild(shape);
+  return svg;
+}
+
 function widgetFrameUrl(value) {
   if (typeof value !== 'string') return null;
   try {
@@ -175,7 +262,7 @@ export const botifyAgentService = {
     const frame = document.createElement('iframe');
     frame.id = 'o_botify_chat';
     frame.title = _t('Botify chat');
-    frame.hidden = true;
+    frame.className = 'o_botify_panel';
     frame.setAttribute(
       'sandbox',
       'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads',
@@ -185,25 +272,64 @@ export const botifyAgentService = {
 
     const launcher = document.createElement('button');
     launcher.type = 'button';
-    launcher.className = 'launcher btn btn-primary';
-    launcher.textContent = _t('Botify');
     launcher.setAttribute('aria-controls', frame.id);
-    launcher.setAttribute('aria-expanded', 'false');
     const badge = document.createElement('span');
-    badge.className = 'badge text-bg-danger ms-1';
+    badge.className = 'badge';
     badge.hidden = true;
-    launcher.append(badge);
 
+    let look = DEFAULT_LOOK;
     let open = false;
     let ready = false;
+    let entering = true;
+    /** Draws launcher and panel from the validated look: only CSS variables and classes. */
+    const render = () => {
+      const vars = {
+        '--bw-primary': look.primary,
+        '--bw-on-primary': onColor(look.primary),
+        '--bw-ring': `${look.primary}66`,
+        '--bw-glow': `${look.primary}55`,
+        '--bw-radius': `${look.radius}px`,
+        '--bw-size': `${LAUNCHER_PX[look.size]}px`,
+        '--bw-ox': `${look.offsetX}px`,
+        '--bw-oy': `${look.offsetY}px`,
+        '--bw-width': `${PANEL_PX[look.width]}px`,
+      };
+      for (const [name, value] of Object.entries(vars)) host.style.setProperty(name, value);
+      host.className = `o_botify_widget o_botify_${look.position}`;
+      frame.classList.toggle('open', open);
+      frame.setAttribute('aria-hidden', String(!open));
+      const text = look.style === 'label' && look.label && !open ? look.label : null;
+      launcher.className = 'launcher';
+      launcher.classList.toggle('pill', text !== null);
+      launcher.classList.toggle('open', open);
+      launcher.classList.toggle('no-mobile', look.hideOnMobile);
+      launcher.classList.toggle('enter', entering);
+      launcher.classList.toggle('bounce', look.animation === 'bounce');
+      launcher.classList.toggle('pulse', look.animation === 'pulse' && !open);
+      const nodes = [icon(open ? CLOSE_ICON : ICONS[look.icon])];
+      if (text) {
+        const span = document.createElement('span');
+        span.className = 'text';
+        span.dir = 'auto';
+        span.textContent = text;
+        nodes.push(span);
+      }
+      launcher.replaceChildren(...nodes, badge);
+      launcher.setAttribute('aria-expanded', String(open));
+      launcher.setAttribute('aria-label', open ? _t('Close Botify chat') : _t('Open Botify chat'));
+    };
+    launcher.addEventListener('animationend', () => {
+      entering = false;
+      launcher.classList.remove('enter');
+    });
+
     const post = (type, payload) => {
       if (ready)
         frame.contentWindow?.postMessage({ botify: PROTOCOL_VERSION, type, payload }, url.origin);
     };
     const setOpen = (next) => {
       open = next;
-      frame.hidden = !open;
-      launcher.setAttribute('aria-expanded', String(open));
+      render();
       if (!open) launcher.focus();
     };
     const toggle = () => {
@@ -319,6 +445,10 @@ export const botifyAgentService = {
         case 'state':
           if (hasKeys(payload, ['open']) && payload.open === false && open) setOpen(false);
           break;
+        case 'look':
+          look = readLook(payload);
+          render();
+          break;
         case 'unread':
           if (
             hasKeys(payload, ['count']) &&
@@ -352,6 +482,7 @@ export const botifyAgentService = {
     browser.setInterval(relay, RETRY_MS);
 
     frame.src = url.href;
+    render();
     host.append(frame, launcher);
     document.body.appendChild(host);
     return { available: true, toggle };
