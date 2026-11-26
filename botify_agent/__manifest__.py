@@ -1,7 +1,7 @@
 {
     "name": "Botify AI Assistant",
     "summary": "An AI assistant inside Odoo that works with each employee's own Odoo permissions",
-    "version": "19.0.3.0.1",
+    "version": "19.0.3.0.2",
     "category": "Productivity",
     "license": "LGPL-3",
     "author": "Umbrella Prime",

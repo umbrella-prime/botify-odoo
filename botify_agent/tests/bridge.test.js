@@ -26,20 +26,42 @@ async function start(frameUrl = identity.frameUrl) {
     postMessage: (message, origin) => replies.push({ message: structuredClone(message), origin }),
   };
   function element(tag) {
+    const classes = new Set();
     return {
       tag,
-      style: {},
+      style: {
+        setProperty(name, value) {
+          this[name] = value;
+        },
+      },
       contentWindow: tag === 'iframe' ? frameWindow : null,
       attributes: {},
       dataset: {},
+      childNodes: [],
+      get className() {
+        return [...classes].join(' ');
+      },
+      set className(value) {
+        classes.clear();
+        for (const name of value.split(' ').filter(Boolean)) classes.add(name);
+      },
+      classList: {
+        contains: (name) => classes.has(name),
+        toggle: (name, on) => (on ? classes.add(name) : classes.delete(name)),
+        remove: (name) => classes.delete(name),
+      },
       setAttribute(name, value) {
         this.attributes[name] = value;
+      },
+      replaceChildren(...nodes) {
+        this.childNodes = nodes;
       },
       addEventListener() {},
       append(...nodes) {
         children.push(...nodes);
       },
       appendChild(node) {
+        this.childNodes.push(node);
         children.push(node);
       },
       focus() {},
@@ -84,6 +106,7 @@ async function start(frameUrl = identity.frameUrl) {
     body: element('body'),
     documentElement: { lang: 'en-US' },
     createElement: element,
+    createElementNS: (_namespace, tag) => element(tag),
   };
   const context = createContext({
     window,
@@ -126,7 +149,17 @@ async function start(frameUrl = identity.frameUrl) {
     await listeners.get('message')?.({ data, origin, source });
     await new Promise(setImmediate);
   };
-  return { service, children, actions, requests, replies, message, action, bus };
+  return {
+    service,
+    readLook: addon.namespace.readLook,
+    children,
+    actions,
+    requests,
+    replies,
+    message,
+    action,
+    bus,
+  };
 }
 
 test('mounts only a cross-origin frame and initializes it with the widget assertion and context', async () => {
@@ -256,4 +289,139 @@ test('relays refresh, grants, acknowledgments and toggle with host-owned credent
     params: { acks: ['a1.receipt.signature'] },
   });
   assert.doesNotMatch(JSON.stringify(replies), /csrf|client/);
+});
+
+/** The launcher as drawn: host side and variables, classes, glyph path and label text. */
+function drawn(children) {
+  const host = children.find(({ tag }) => tag === 'div');
+  const launcher = children.find(({ tag }) => tag === 'button');
+  const [glyph, ...rest] = launcher.childNodes;
+  const label = rest.find(({ className }) => className === 'text');
+  return {
+    host: host.className,
+    vars: Object.fromEntries(Object.entries(host.style).filter(([name]) => name.startsWith('--'))),
+    launcher: launcher.className,
+    glyph: glyph.childNodes[0].attributes.d,
+    label: label ? label.textContent : null,
+    innerHTML: launcher.innerHTML ?? label?.innerHTML,
+  };
+}
+
+const CHAT = 'M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z';
+const DEFAULT_VARS = {
+  '--bw-primary': '#4f46e5',
+  '--bw-on-primary': '#ffffff',
+  '--bw-ring': '#4f46e566',
+  '--bw-glow': '#4f46e555',
+  '--bw-radius': '16px',
+  '--bw-size': '56px',
+  '--bw-ox': '20px',
+  '--bw-oy': '20px',
+  '--bw-width': '380px',
+};
+
+test('draws the website default launcher until the frame sends a look', async () => {
+  const { children, message } = await start();
+  const before = drawn(children);
+  assert.deepEqual(before, {
+    host: 'o_botify_widget o_botify_right',
+    vars: DEFAULT_VARS,
+    launcher: 'launcher enter',
+    glyph: CHAT,
+    label: null,
+    innerHTML: undefined,
+  });
+  const studio = { primary: '#0F766E', position: 'left', style: 'label', label: 'اسألني' };
+  // Before the frame is ready, or from anyone but the frame: ignored.
+  await message(envelope('look', studio));
+  await message(envelope('ready', null));
+  await message(envelope('look', studio), { origin: 'https://other.test' });
+  await message(envelope('look', studio), { source: {} });
+  assert.deepEqual(drawn(children), before);
+});
+
+test('follows the widget studio look the frame sends', async () => {
+  const { children, message, service } = await start();
+  await message(envelope('ready', null));
+  await message(
+    envelope('look', {
+      primary: '#0F766E',
+      radius: 8,
+      position: 'left',
+      width: 'wide',
+      style: 'label',
+      icon: 'headset',
+      label: 'اسألني',
+      size: 'lg',
+      offsetX: 24,
+      offsetY: 24,
+      hideOnMobile: true,
+      animation: 'pulse',
+    }),
+  );
+  const look = drawn(children);
+  assert.equal(look.host, 'o_botify_widget o_botify_left');
+  assert.deepEqual(look.vars, {
+    '--bw-primary': '#0F766E',
+    '--bw-on-primary': '#ffffff',
+    '--bw-ring': '#0F766E66',
+    '--bw-glow': '#0F766E55',
+    '--bw-radius': '8px',
+    '--bw-size': '64px',
+    '--bw-ox': '24px',
+    '--bw-oy': '24px',
+    '--bw-width': '440px',
+  });
+  assert.equal(look.launcher, 'launcher pill no-mobile enter pulse');
+  assert.equal(look.label, 'اسألني');
+  // Open: the close glyph, no label, the panel shown (on the launcher's side, by host class).
+  service.toggle();
+  const frame = children.find(({ tag }) => tag === 'iframe');
+  assert.equal(frame.classList.contains('open'), true);
+  assert.equal(drawn(children).label, null);
+  assert.notEqual(drawn(children).glyph, look.glyph);
+});
+
+test('ignores or clamps a hostile look and never injects markup', async () => {
+  const { children, message, readLook } = await start();
+  await message(envelope('ready', null));
+  const hostile = {
+    primary: 'red;background:url(x)',
+    radius: -5,
+    position: 'top',
+    width: 'full',
+    style: 'avatar',
+    icon: '<svg onload=alert(1)>',
+    label: '  <img src=x onerror=alert(1)><script>alert(1)</script>  ',
+    size: 9999,
+    offsetX: 9999,
+    offsetY: Number.NaN,
+    hideOnMobile: 'yes',
+    animation: 'spin',
+    avatarUrl: 'https://evil.test/x.png',
+  };
+  await message(envelope('look', hostile));
+  const look = drawn(children);
+  assert.equal(look.host, 'o_botify_widget o_botify_right');
+  assert.deepEqual(look.vars, { ...DEFAULT_VARS, '--bw-radius': '0px', '--bw-ox': '120px' });
+  assert.equal(look.launcher, 'launcher enter');
+  assert.equal(look.glyph, CHAT);
+  assert.equal(look.innerHTML, undefined);
+  assert.doesNotMatch(JSON.stringify(look.vars), /url|;|evil/);
+
+  // A label is only ever text: kept verbatim (trimmed) in textContent.
+  await message(envelope('look', { style: 'label', label: hostile.label }));
+  assert.equal(drawn(children).label, '<img src=x onerror=alert(1)><script>alert(1)</script>');
+  assert.equal(drawn(children).innerHTML, undefined);
+  assert.equal(readLook({ label: 'x'.repeat(500) }).label.length, 60);
+
+  const inherited = Object.create({ primary: '#000000', position: 'left' });
+  for (const payload of [null, 'look', ['#0F766E'], 42, new Date(), inherited]) {
+    assert.deepEqual({ ...readLook(payload) }, { ...readLook({}) });
+  }
+  // A malformed look goes back to the default rather than keeping the previous one.
+  await message(envelope('look', { primary: '#0F766E', position: 'left' }));
+  await message(envelope('look', 'nonsense'));
+  assert.equal(drawn(children).host, 'o_botify_widget o_botify_right');
+  assert.equal(drawn(children).vars['--bw-primary'], '#4f46e5');
 });

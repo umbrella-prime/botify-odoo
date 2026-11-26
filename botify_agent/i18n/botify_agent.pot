@@ -218,7 +218,13 @@ msgstr ""
 #. module: botify_agent
 #. odoo-javascript
 #: code:addons/botify_agent/static/src/botify_service.js:0
-msgid "Botify"
+msgid "Close Botify chat"
+msgstr ""
+
+#. module: botify_agent
+#. odoo-javascript
+#: code:addons/botify_agent/static/src/botify_service.js:0
+msgid "Open Botify chat"
 msgstr ""
 
 #. module: botify_agent

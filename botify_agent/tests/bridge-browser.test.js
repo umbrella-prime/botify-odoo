@@ -42,8 +42,8 @@ const config = { siteKey, title: 'Botify', locale: 'en' };
  * Opens the fixture Odoo page with the real addon and widget. `server.events` is what Odoo has
  * pending; `server.expired` lists assertions Botify refuses as expired (`true`: every one).
  */
-async function openOdoo(browser, { events = [], expired = [] } = {}) {
-  const server = { events, unread: events.length, expired, assertions: 0 };
+async function openOdoo(browser, { events = [], expired = [], look = null } = {}) {
+  const server = { events, unread: events.length, expired, assertions: 0, botifyGets: [] };
   const refused = (assertion) => server.expired === true || server.expired.includes(assertion);
   const context = await browser.newContext({ serviceWorkers: 'block' });
   await context.addCookies([
@@ -113,12 +113,18 @@ async function openOdoo(browser, { events = [], expired = [] } = {}) {
       }
     }
     if (url.origin === botify) {
+      if (request.method() === 'GET') server.botifyGets.push(url.pathname);
       switch (url.pathname) {
-        case '/widget/v1/frame':
+        case '/widget/v1/frame': {
+          // As the API embeds it: JSON escaped for a double-quoted attribute.
+          const attribute = look
+            ? ` data-look="${JSON.stringify(look).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`)}"`
+            : '';
           return route.fulfill({
             contentType: 'text/html',
-            body: `<!doctype html><link rel="stylesheet" href="frame.css"><div id="botify-widget" data-site-key="${siteKey}"></div><script src="frame.js" defer></script>`,
+            body: `<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="frame.css"><div id="botify-widget" data-site-key="${siteKey}"${attribute}></div><script src="frame.js" defer></script>`,
           });
+        }
         case '/widget/v1/frame.css':
           return route.fulfill({
             contentType: 'text/css',
@@ -407,6 +413,96 @@ test('the addon embeds the real widget across origins, with isolated RPC and wor
       chat.getByRole('link', { name: 'Report' }).click({ timeout: 2500 }),
     ]);
     assert.equal(download.suggestedFilename(), 'report.txt');
+  } finally {
+    await browser.close();
+  }
+});
+
+/** Where the launcher and panel sit, and how they look. */
+async function launcherBox(page) {
+  await page.mouse.move(0, 0); // off the launcher's hover lift
+  await page.waitForTimeout(300);
+  return page.evaluate(() => {
+    const launcher = document.querySelector('[data-botify-widget] button.launcher');
+    const panel = document.querySelector('[data-botify-widget] iframe');
+    const style = getComputedStyle(launcher);
+    const box = launcher.getBoundingClientRect();
+    const frame = panel.getBoundingClientRect();
+    return {
+      left: Math.round(box.left),
+      right: Math.round(window.innerWidth - box.right),
+      bottom: Math.round(window.innerHeight - box.bottom),
+      height: Math.round(box.height),
+      radius: style.borderRadius,
+      background: style.backgroundColor,
+      text: launcher.innerText.trim(),
+      panelLeft: Math.round(frame.left),
+      panelRight: Math.round(window.innerWidth - frame.right),
+      panelWidth: Math.round(frame.width),
+      panelVisible: getComputedStyle(panel).visibility === 'visible',
+    };
+  });
+}
+
+test('the launcher follows the widget studio look the frame embeds', async () => {
+  const browser = await chromium.launch();
+  try {
+    // Defaults: the website's round brand-coloured launcher, bottom-right.
+    const plain = await openOdoo(browser);
+    const launcher = plain.page.locator('[data-botify-widget] button.launcher');
+    await launcher.waitFor({ timeout: 2500 });
+    await plain.page.waitForTimeout(600); // the arrival pop
+    await launcher.click();
+    await plain.page.waitForTimeout(600); // the panel's open transition
+    assert.deepEqual(await launcherBox(plain.page), {
+      left: (await launcherBox(plain.page)).left,
+      right: 20,
+      bottom: 20,
+      height: 56,
+      radius: '999px',
+      background: 'rgb(79, 70, 229)',
+      text: '',
+      panelLeft: (await launcherBox(plain.page)).panelLeft,
+      panelRight: 20,
+      panelWidth: 380,
+      panelVisible: true,
+    });
+
+    const studio = await openOdoo(browser, {
+      look: {
+        primary: '#0F766E',
+        radius: 16,
+        position: 'left',
+        width: 'regular',
+        style: 'label',
+        icon: 'chat',
+        label: 'اسألني',
+        size: 'lg',
+        offsetX: 24,
+        offsetY: 24,
+        hideOnMobile: false,
+        animation: 'none',
+      },
+    });
+    const styled = studio.page.locator('[data-botify-widget] button.launcher');
+    await styled.filter({ hasText: 'اسألني' }).waitFor({ timeout: 2500 });
+    await studio.page.waitForTimeout(600);
+    // The look came with the frame: a closed chat loads only the frame and its assets.
+    assert.deepEqual(studio.bootstrap, []);
+    assert.deepEqual([...new Set(studio.server.botifyGets)].sort(), [
+      '/widget/v1/frame',
+      '/widget/v1/frame.css',
+      '/widget/v1/frame.js',
+    ]);
+    await styled.click();
+    await studio.page.waitForTimeout(600);
+    const look = await launcherBox(studio.page);
+    assert.equal(look.left, 24);
+    assert.equal(look.bottom, 24);
+    assert.equal(look.height, 64);
+    assert.equal(look.background, 'rgb(15, 118, 110)');
+    assert.equal(look.panelLeft, 24);
+    assert.equal(look.panelVisible, true);
   } finally {
     await browser.close();
   }
